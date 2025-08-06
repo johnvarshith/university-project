@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        .chatbot-container {
+            position: fixed;
+            bottom: 6rem;
+            right: 6rem;
+            width: 300px;
+            height: 400px;
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+        }
+        .chatbot-header {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 1rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        .chatbot-input {
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        .message {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        .message.user {
+            background: rgba(59, 130, 246, 0.2);
+            margin-left: auto;
+        }
+        .message.bot {
+            background: rgba(45, 212, 191, 0.2);
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Live Q&A Section -->
+        <div class="mt-8 bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl animate-fade-in">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-teal-400 to-green-400 bg-clip-text text-transparent">
+                Live Q&A Sessions
+            </h2>
+            <div class="space-y-3">
+                <div class="bg-slate-700/50 p-3 rounded-lg">
+                    <p class="font-medium">📢 Live Q&A: Mathematics Midterm Prep</p>
+                    <p class="text-sm text-slate-400">📅 October 20, 2023 | 🕒 4:00 PM</p>
+                    <button class="mt-2 px-3 py-1 bg-teal-500/20 text-teal-400 rounded-full text-sm hover:bg-teal-500/30 transition">
+                        Join Session
+                    </button>
+                </div>
+                <div class="bg-slate-700/50 p-3 rounded-lg">
+                    <p class="font-medium">📢 Live Q&A: Computer Science Lab Help</p>
+                    <p class="text-sm text-slate-400">📅 October 22, 2023 | 🕒 3:00 PM</p>
+                    <button class="mt-2 px-3 py-1 bg-teal-500/20 text-teal-400 rounded-full text-sm hover:bg-teal-500/30 transition">
+                        Join Session
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Chatbot Icon -->
+    <div class="fixed bottom-6 right-6">
+        <div id="chatbot-icon" class="bg-slate-800/70 backdrop-blur-lg rounded-full p-3 shadow-xl cursor-pointer hover:bg-slate-700/50 transition">
+            <img src="https://img.icons8.com/color/48/000000/chatbot.png" alt="Chatbot" class="w-8 h-8">
+        </div>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="chatbot-container">
+        <div class="chatbot-header">
+            <h3 class="text-lg font-semibold">University Chatbot</h3>
+            <button id="close-chatbot" class="text-slate-400 hover:text-slate-200">✕</button>
+        </div>
+        <div id="chatbot-messages" class="chatbot-messages">
+            <div class="message bot">Hello! How can I assist you today?</div>
+        </div>
+        <div class="chatbot-input">
+            <input id="chatbot-input" type="text" placeholder="Type your message..." class="w-full bg-slate-700/50 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400">
+        </div>
+    </div>
+
+    <script>
+        // Chatbot Logic
+        const chatbotIcon = document.getElementById('chatbot-icon');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const closeChatbot = document.getElementById('close-chatbot');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+
+        // Toggle Chatbot
+        chatbotIcon.addEventListener('click', () => {
+            chatbotContainer.style.display = 'flex';
+        });
+
+        closeChatbot.addEventListener('click', () => {
+            chatbotContainer.style.display = 'none';
+        });
+
+        // Send Message
+        chatbotInput.addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter' && chatbotInput.value.trim() !== '') {
+                const userMessage = chatbotInput.value.trim();
+                chatbotInput.value = '';
+
+                // Add user message to chat
+                const userMessageElement = document.createElement('div');
+                userMessageElement.className = 'message user';
+                userMessageElement.textContent = userMessage;
+                chatbotMessages.appendChild(userMessageElement);
+
+                // Simulate bot response (replace with API call)
+                const botResponse = await getBotResponse(userMessage);
+
+                // Add bot response to chat
+                const botMessageElement = document.createElement('div');
+                botMessageElement.className = 'message bot';
+                botMessageElement.textContent = botResponse;
+                chatbotMessages.appendChild(botMessageElement);
+
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+        });
+
+        // Real-Time Bot Response Logic (Replace with API call)
+        async function getBotResponse(userMessage) {
+            // Simulate an API call delay
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const lowerCaseMessage = userMessage.toLowerCase();
+
+                    if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi')) {
+                        resolve('Hi there! How can I help you today?');
+                    } else if (lowerCaseMessage.includes('schedule')) {
+                        resolve('You can check your class schedule in the "Weekly Schedule" section.');
+                    } else if (lowerCaseMessage.includes('event')) {
+                        resolve('Upcoming events are listed in the "Campus Events" section.');
+                    } else {
+                        resolve('I’m here to help! Let me know if you have any questions about your classes, events, or university services.');
+                    }
+                }, 500); // Simulate a 500ms delay for API response
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .grid-item {
+            transform-origin: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cursor-effect {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: all 0.1s ease; /* Faster cursor movement */
+            mix-blend-mode: difference;
+        }
+
+        .staggered-animation {
+            animation: slideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .grid-item:nth-child(1) { animation-delay: 0.1s; }
+        .grid-item:nth-child(2) { animation-delay: 0.2s; }
+        .grid-item:nth-child(3) { animation-delay: 0.3s; }
+        .grid-item:nth-child(4) { animation-delay: 0.4s; }
+        .grid-item:nth-child(5) { animation-delay: 0.5s; }
+        .grid-item:nth-child(6) { animation-delay: 0.6s; }
+        .grid-item:nth-child(7) { animation-delay: 0.7s; }
+        .grid-item:nth-child(8) { animation-delay: 0.8s; }
+
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 bg-[size:400%_400%] animate-[gradient_15s_ease_infinite] overflow-auto">
+
+
+    <div class="cursor-effect"></div>
+
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="staggered-animation mb-12 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 animate-float">
+                    RGUKT R.K valley
+                </h1>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">
+                <!-- Overview Card -->
+                <div class="grid-item staggered-animation group col-span-2 row-span-2 bg-gradient-to-br from-slate-800/50 to-slate-700/30 backdrop-blur-lg rounded-2xl p-6 border border-slate-700/50 hover:border-cyan-400/30 hover:scale-[1.02] transition-all hover:shadow-2xl hover:shadow-cyan-500/10 cursor-pointer">
+                    <a href="campus-overview.html" class="h-full flex flex-col justify-center no-underline">
+                        <h2 class="text-2xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                            Campus Overview
+                        </h2>
+                        <p class="text-slate-300">Real-time university metrics and operational insights</p>
+                    </a>
+                </div>
+
+                <!-- Students Card -->
+                <div class="grid-item staggered-animation group bg-gradient-to-br from-slate-800/50 to-slate-700/30 backdrop-blur-lg rounded-2xl p-6 border border-slate-700/50 hover:border-green-400/30 hover:scale-[1.02] transition-all hover:shadow-2xl hover:shadow-green-500/10 cursor-pointer">
+                    <a href="student-portal.html" class="h-full flex flex-col justify-center no-underline">
+                        <h2 class="text-xl font-bold mb-2 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                            Student Portal
+                        </h2>
+                        <p class="text-slate-300 text-sm">Manage enrollments and academic records</p>
+                    </a>
+                </div>
+
+                <!-- Faculty Card -->
+                <div class="grid-item staggered-animation group bg-gradient-to-br from-slate-800/50 to-slate-700/30 backdrop-blur-lg rounded-2xl p-6 border border-slate-700/50 hover:border-blue-400/30 hover:scale-[1.02] transition-all hover:shadow-2xl hover:shadow-blue-500/10 cursor-pointer">
+                    <a href="index1.html" class="h-full flex flex-col justify-center no-underline">
+                        <h2 class="text-xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                            chatbot
+                        </h2>
+                        <p class="text-slate-300 text-sm">yours A.I assist</p>
+                    </a>
+                </div>
+
+                <!-- Events Card -->
+                <div class="grid-item staggered-animation group col-span-2 bg-gradient-to-br from-slate-800/50 to-slate-700/30 backdrop-blur-lg rounded-2xl p-6 border border-slate-700/50 hover:border-purple-400/30 hover:scale-[1.02] transition-all hover:shadow-2xl hover:shadow-purple-500/10 cursor-pointer">
+                    <a href="university announcments.html" class="h-full flex flex-col justify-center no-underline">
+                        <h2 class="text-2xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                            University Announcements
+                        </h2>
+                        <p class="text-slate-300">Browse and manage campus activities</p>
+                    </a>
+                </div>
+
+
+                <div class="grid-item staggered-animation group col-span-2 bg-gradient-to-br from-slate-800/50 to-slate-700/30 backdrop-blur-lg rounded-2xl p-6 border border-slate-700/50 hover:border-purple-400/30 hover:scale-transition-all hover:shadow-2xl hover:shadow-purple-500/10 cursor-pointer">
+                    <a href="university Discussion Form.html" class="h-full flex flex-col justify-center no-underline">
+                        <h2 class="text-2xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                            University Discussions
+                        </h2>
+                        <p class="text-slate-300">Browse and manage campus discussions</p>
+                    </a>
+                </div>
+
+                <!-- Analytics Card -->
+                <div class="grid-item staggered-animation group row-span-2 bg-gradient-to-br from-slate-800/50 to-slate-700/30 backdrop-blur-lg rounded-2xl p-6 border border-slate-700/50 hover:border-amber-400/30 hover:scale-[1.02] transition-all hover:shadow-2xl hover:shadow-amber-500/10 cursor-pointer">
+                    <a href="club-management.html" class="h-full flex flex-col justify-center items-center no-underline">
+                        <svg class="w-12 h-12 mb-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <h2 class="text-xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                            Club Activities
+                        </h2>
+                        <p class="text-slate-300 text-sm">Explore and join university clubs</p>
+                    </a>
+                </div>
+
+
+
+                <!-- Club Activities Card -->
+                <div class="grid-item staggered-animation group bg-gradient-to-br from-slate-800/50 to-slate-700/30 backdrop-blur-lg rounded-2xl p-6 border border-slate-700/50 hover:border-teal-400/30 hover:scale-[1.02] transition-all hover:shadow-2xl hover:shadow-teal-500/10 cursor-pointer">
+                    <a href="career-extracurricular.html" class="h-full flex flex-col justify-center no-underline">
+                        <h2 class="text-xl font-bold mb-2 bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                            career & Extra-ciricullar activities
+                        </h2>
+                        <p class="text-slate-300 text-sm">Explore and join university clubs</p>
+                    </a>
+                </div>
+                <!-- Scheduling Card -->
+                <div class="grid-item staggered-animation group bg-gradient-to-br from-slate-800/50 to-slate-700/30 backdrop-blur-lg rounded-2xl p-6 border border-slate-700/50 hover:border-orange-400/30 hover:scale-[1.02] transition-all hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer">
+                    <a href="alumni-network.html" class="h-full flex flex-col justify-center no-underline">
+                        <h2 class="text-xl font-bold mb-2 bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+                            Alumni Network
+                        </h2>
+                        <p class="text-slate-300 text-sm">Former students records</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cursor effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor-effect');
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            // Scale up when hovering interactive elements
+            const interactive = document.querySelectorAll('.grid-item, button, a');
+            interactive.forEach(el => {
+                if (el.matches(':hover')) {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursor.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                } else {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.backgroundColor = 'transparent';
+                }
+            });
+        });
+
+        // Add click ripple effect
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '100px';
+                ripple.style.height = '100px';
+                ripple.style.background = 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.borderRadius = '50%';
+                ripple.style.left = e.clientX - item.offsetLeft + 'px';
+                ripple.style.top = e.clientY - item.offsetTop + 'px';
+                
+                item.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 500);
+            });
+        });
+
+        // Fluid animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

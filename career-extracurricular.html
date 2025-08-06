@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career & Extracurricular Opportunities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8 text-center animate-fade-in">
+            <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                Career & Extracurricular Opportunities
+            </h1>
+            <p class="text-slate-300 mt-2">Explore internships, hackathons, and club activities tailored for you.</p>
+        </header>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+            <!-- Internship & Job Posting Board -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    Internship & Job Board
+                </h2>
+                <div id="job-board" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+
+            <!-- Hackathon & Project Collaboration Hub -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    Hackathon Hub
+                </h2>
+                <div id="hackathon-hub" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+
+            <!-- Club & Society Discussion Spaces -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Club Activities
+                </h2>
+                <div id="club-activities" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-slate-400 text-sm">
+            <p>🔒 Secure Student Portal | 📱 Mobile-Friendly Design | 🚀 Real-Time Updates</p>
+            <p class="mt-2">Need help? Contact academic support: support@university.edu</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sample data for job board, hackathon hub, and club activities
+        const jobBoard = [
+            "Software Engineer Intern at TechCorp (Apply by Nov 15)",
+            "Data Analyst Intern at DataWorks (Apply by Nov 20)",
+            "Marketing Intern at CreativeAgency (Apply by Nov 25)",
+        ];
+
+        const hackathonHub = [
+            "AI Hackathon 2023: December 1-3 (Register Now)",
+            "Blockchain Challenge: November 18-19 (Register Now)",
+            "Sustainability Hackathon: December 10-12 (Register Now)",
+        ];
+
+        const clubActivities = [
+            "Join the Coding Club: Weekly meetups on Fridays",
+            "Photography Society: Workshop on November 12",
+            "Debate Club: Open session on November 15",
+        ];
+
+        // Function to add dynamic content
+        function addDynamicContent(containerId, data) {
+            const container = document.getElementById(containerId);
+            const item = document.createElement("div");
+            item.className = "glassmorphism rounded-lg p-4 animate-fade-in";
+            item.textContent = data[Math.floor(Math.random() * data.length)];
+            container.prepend(item);
+
+            // Limit the number of items to 5
+            if (container.children.length > 5) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        // Simulate real-time updates
+        setInterval(() => addDynamicContent("job-board", jobBoard), 5000);
+        setInterval(() => addDynamicContent("hackathon-hub", hackathonHub), 5000);
+        setInterval(() => addDynamicContent("club-activities", clubActivities), 5000);
+
+        // Initial content load
+        addDynamicContent("job-board", jobBoard);
+        addDynamicContent("hackathon-hub", hackathonHub);
+        addDynamicContent("club-activities", clubActivities);
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Announcements & Notifications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8 text-center animate-fade-in">
+            <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                University Announcements & Notifications
+            </h1>
+            <p class="text-slate-300 mt-2">Stay updated with the latest university news and events.</p>
+        </header>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+            <!-- Announcements Section -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    Announcements
+                </h2>
+                <div id="announcements" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    Notifications
+                </h2>
+                <div id="notifications" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+
+            <!-- Personalized Feed Section -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Personalized Feed
+                </h2>
+                <div id="personalized-feed" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-slate-400 text-sm">
+            <p>🔒 Secure Student Portal | 📱 Mobile-Friendly Design | 🚀 Real-Time Updates</p>
+            <p class="mt-2">Need help? Contact academic support: support@university.edu</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sample data for announcements, notifications, and personalized feed
+        const announcements = [
+            { icon: "📢", text: "Exam schedules for Semester 5 have been released.", timestamp: "2 mins ago" },
+            { icon: "🎉", text: "University fest 'TechVista' starts next week.", timestamp: "10 mins ago" },
+            { icon: "📊", text: "Results for the mid-term exams are now available.", timestamp: "1 hour ago" },
+            { icon: "📅", text: "Registration for the coding competition is now open.", timestamp: "3 hours ago" },
+            { icon: "📚", text: "Library will remain open 24/7 during exams.", timestamp: "5 hours ago" },
+        ];
+
+        const notifications = [
+            { icon: "📝", text: "New assignment uploaded for CS101.", timestamp: "Just now" },
+            { icon: "⚠️", text: "Your attendance for Math202 is below 75%.", timestamp: "5 mins ago" },
+            { icon: "⏰", text: "Reminder: Submit your project proposal by Friday.", timestamp: "15 mins ago" },
+            { icon: "📖", text: "New lecture notes uploaded for Data Structures.", timestamp: "30 mins ago" },
+            { icon: "🔔", text: "Your class schedule has been updated.", timestamp: "1 hour ago" },
+        ];
+
+        const personalizedFeed = [
+            { icon: "📄", text: "New research paper published in your interest area.", timestamp: "2 mins ago" },
+            { icon: "🎓", text: "Upcoming workshop on AI and Machine Learning.", timestamp: "10 mins ago" },
+            { icon: "📹", text: "Your course 'Data Structures' has a new lecture.", timestamp: "1 hour ago" },
+            { icon: "📢", text: "Scholarship applications are now open.", timestamp: "2 hours ago" },
+            { icon: "📅", text: "Career fair registration deadline is approaching.", timestamp: "3 hours ago" },
+        ];
+
+        // Function to add dynamic content
+        function addDynamicContent(containerId, data) {
+            const container = document.getElementById(containerId);
+            const item = document.createElement("div");
+            item.className = "glassmorphism rounded-lg p-4 animate-slide-in";
+            const randomItem = data[Math.floor(Math.random() * data.length)];
+            item.innerHTML = `
+                <div class="flex items-start space-x-3">
+                    <span class="text-xl">${randomItem.icon}</span>
+                    <div>
+                        <p class="text-sm">${randomItem.text}</p>
+                        <p class="text-xs text-slate-400 mt-1">${randomItem.timestamp}</p>
+                    </div>
+                </div>
+            `;
+            container.prepend(item);
+
+            // Limit the number of items to 5
+            if (container.children.length > 5) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        // Simulate real-time updates
+        setInterval(() => addDynamicContent("announcements", announcements), 5000);
+        setInterval(() => addDynamicContent("notifications", notifications), 5000);
+        setInterval(() => addDynamicContent("personalized-feed", personalizedFeed), 5000);
+
+        // Initial content load
+        addDynamicContent("announcements", announcements);
+        addDynamicContent("notifications", notifications);
+        addDynamicContent("personalized-feed", personalizedFeed);
+    </script>
+</body>
+</html>

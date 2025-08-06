@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About RGUKT</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* Added background image styling */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(30, 41, 59, 0.92), rgba(30, 41, 59, 0.92)), 
+                            url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <header class="mb-8 text-center animate-fade-in">
+            <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                About RGUKT
+            </h1>
+            <p class="text-slate-300 mt-2">Empowering Rural Youth Through Technology</p>
+        </header>
+
+        <!-- Founding of RGUKT -->
+        <section class="mb-8 bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl animate-fade-in">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                Founding of RGUKT
+            </h2>
+            <p class="text-slate-300">
+                The idea to create RGUKT germinated in April 2007, at a meeting between Prof. D. Raj Reddy and Prof. K.C. Reddy, who then took the idea to the then Chief Minister of Andhra Pradesh, Dr. Y.S. Rajashekar Reddy. Dr. YSR, by then, was not happy with the opportunities available to rural youth and wanted to start a university modeled on IIIT to exclusively concentrate on rural youth in imparting technology-oriented higher education for bettering their employment potential.
+            </p>
+            <p class="text-slate-300 mt-4">
+                A Task Force was created under the Chairmanship of Prof. K.C. Reddy, the then chairman APSCHE, which recommended establishing a technological university to benefit rural youth. In March 2008, the AP Government created RGUKT with three campuses through an Act of the Legislature as a full-fledged university.
+            </p>
+        </section>
+
+        <!-- Why RGUKT? -->
+        <section class="mb-8 bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl animate-fade-in">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                Why RGUKT?
+            </h2>
+            <p class="text-slate-300">
+                A person born into a low-income, rural family in India struggles to aspire to study at an IIT or aim to be selected into the IAS. This is true in many cases due to inherent disadvantages such as:
+            </p>
+            <ul class="list-disc list-inside text-slate-300 mt-2">
+                <li>The educational level of the parents</li>
+                <li>The quality of teachers and schools</li>
+                <li>The ability to pay for coaching classes</li>
+                <li>The time and effort devoted to studying</li>
+            </ul>
+            <p class="text-slate-300 mt-4">
+                RGUKT aims to help remedy this situation by providing high-quality education to the top 1% of rural students through its six-year integrated B.Tech program.
+            </p>
+        </section>
+
+        <!-- Educational Objectives -->
+        <section class="mb-8 bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl animate-fade-in">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Educational Objectives
+            </h2>
+            <p class="text-slate-300">
+                The primary objective of establishing RGUKT was to provide high-quality educational opportunities for rural youth. The university focuses on:
+            </p>
+            <ul class="list-disc list-inside text-slate-300 mt-2">
+                <li>Learning by Example, Learning by Doing, and Problem-Based Learning</li>
+                <li>Using Information and Communication Technologies (ICT) for education</li>
+                <li>Providing a broad-based education including Humanities and Social Sciences</li>
+                <li>Developing soft skills and entrepreneurship</li>
+            </ul>
+        </section>
+
+        <!-- Present Leadership -->
+        <section class="mb-8 bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl animate-fade-in">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                Present Leadership
+            </h2>
+            <p class="text-slate-300">
+                RGUKT is guided by a distinguished leadership team:
+            </p>
+            <ul class="list-disc list-inside text-slate-300 mt-2">
+                <li>Prof. Raj Reddy - Chief Mentor</li>
+                <li>Prof. K.C. Reddy - Chancellor</li>
+                <li>Prof. M. Vijaya Kumar - Vice-Chancellor (FAC)</li>
+                <li>Prof. Matli Chandrasekhar - Director, RGUKT Nuzvid</li>
+                <li>Prof. A V S S Kumara Swami Gupta - Director, RGUKT RK Valley</li>
+                <li>Prof. Bhaskar Patel - Director, RGUKT Ongole</li>
+                <li>Prof. K. V. G. D. Balaji - Director, RGUKT Srikakulam</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-slate-400 text-sm">
+            <p>🔒 Secure Student Portal | 📱 Mobile-Friendly Design | 🚀 Real-Time Updates</p>
+            <p class="mt-2">Need help? Contact academic support: support@rgukt.edu</p>
+        </footer>
+    </div>
+</body>
+
+<body class="min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- All existing content remains exactly the same -->
+        <!-- Header Section -->
+        <header class="mb-8 text-center animate-fade-in">
+            <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                About RGUKT
+            </h1>
+            <p class="text-slate-300 mt-2">Empowering Rural Youth Through Technology</p>
+        </header>
+
+        <!-- Rest of the sections remain unchanged -->
+        <!-- ... -->
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Network & Professional Growth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8 text-center animate-fade-in">
+            <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                Alumni Network & Professional Growth
+            </h1>
+            <p class="text-slate-300 mt-2">Connect with alumni, gain mentorship, and grow professionally.</p>
+        </header>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+            <!-- Alumni Directory -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                    Alumni Directory
+                </h2>
+                <div id="alumni-directory" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+
+            <!-- Networking Portal -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    Networking Portal
+                </h2>
+                <div id="networking-portal" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+
+            <!-- Guest Talks & Webinars -->
+            <div class="glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Guest Talks & Webinars
+                </h2>
+                <div id="guest-talks" class="space-y-4">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Referrals & Industry Connections -->
+        <div class="mt-8 glassmorphism rounded-xl p-6 shadow-xl hover-scale">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                Job Referrals & Industry Connections
+            </h2>
+            <div id="job-referrals" class="space-y-4">
+                <!-- Dynamic content will be added here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-slate-400 text-sm">
+            <p>🔒 Secure Student Portal | 📱 Mobile-Friendly Design | 🚀 Real-Time Updates</p>
+            <p class="mt-2">Need help? Contact academic support: support@university.edu</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sample data for alumni directory, networking portal, guest talks, and job referrals
+        const alumniDirectory = [
+            "prasad - Software Engineer at Google (Class of 2015)",
+            "siva - Data Scientist at Microsoft (Class of 2018)",
+            "prakash - Product Manager at Amazon (Class of 2020)",
+        ];
+
+        const networkingPortal = [
+            "Connect with prasad for career advice in tech.",
+            "siva is available for mentorship in data science.",
+            "prakash is hosting a networking session on November 20.",
+        ];
+
+        const guestTalks = [
+            "Guest Talk: 'AI in Industry' by prasad on November 15",
+            "Webinar: 'Career Growth in Tech' by siva on November 18",
+            "Panel Discussion: 'Future of Work' by prakash on November 22",
+        ];
+
+        const jobReferrals = [
+            "Job Referral: Software Engineer at Google (Referral by prasad)",
+            "Job Referral: Data Analyst at Microsoft (Referral by siva)",
+            "Job Referral: Product Manager at Amazon (Referral by prakash)",
+        ];
+
+        // Function to add dynamic content
+        function addDynamicContent(containerId, data) {
+            const container = document.getElementById(containerId);
+            const item = document.createElement("div");
+            item.className = "glassmorphism rounded-lg p-4 animate-fade-in";
+            item.textContent = data[Math.floor(Math.random() * data.length)];
+            container.prepend(item);
+
+            // Limit the number of items to 5
+            if (container.children.length > 5) {
+                container.removeChild(container.lastChild);
+            }
+        }
+
+        // Simulate real-time updates
+        setInterval(() => addDynamicContent("alumni-directory", alumniDirectory), 5000);
+        setInterval(() => addDynamicContent("networking-portal", networkingPortal), 5000);
+        setInterval(() => addDynamicContent("guest-talks", guestTalks), 5000);
+        setInterval(() => addDynamicContent("job-referrals", jobReferrals), 5000);
+
+        // Initial content load
+        addDynamicContent("alumni-directory", alumniDirectory);
+        addDynamicContent("networking-portal", networkingPortal);
+        addDynamicContent("guest-talks", guestTalks);
+        addDynamicContent("job-referrals", jobReferrals);
+    </script>
+</body>
+</html>

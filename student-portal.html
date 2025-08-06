@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - University Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @keyframes progressBar {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        .progress-bar {
+            animation: progressBar 1.5s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <header class="mb-8 text-center animate-fade-in">
+            <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                Student Portal
+            </h1>
+            <p class="text-slate-300 mt-2">Welcome back hemanth</p>
+        </header>
+
+        <!-- Main Dashboard -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+            <!-- Schedule Section -->
+            <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    Weekly Schedule
+                </h2>
+                <div class="space-y-4">
+                    <div class="schedule-day">
+                        <h3 class="font-semibold text-cyan-400">Monday</h3>
+                        <div class="ml-4 mt-2 space-y-2">
+                            <div class="bg-slate-700/50 p-3 rounded-lg">
+                                <p class="text-sm">⏰ 9:00 AM - Mathematics (Room 204)</p>
+                                <p class="text-sm">👤 Prof. Smith</p>
+                            </div>
+                            <div class="bg-slate-700/50 p-3 rounded-lg">
+                                <p class="text-sm">⏰ 11:00 AM - Computer Science Lab</p>
+                                <p class="text-sm">👤 Dr. Johnson</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat for other days -->
+                </div>
+            </div>
+
+            <!-- Exam & Events Section -->
+            <div class="space-y-6">
+                <!-- Exam Tracker -->
+                <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                        Exam Schedule
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between bg-slate-700/50 p-3 rounded-lg">
+                            <div>
+                                <p class="font-medium">Mathematics Midterm</p>
+                                <p class="text-sm text-slate-400">📅 October 15, 2023</p>
+                            </div>
+                            <button onclick="openPopup('Reminder was set')" class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm hover:bg-cyan-500/30 transition">
+                                Set Reminder
+                            </button>
+                        </div>
+                        <!-- Repeat for other exams -->
+                    </div>
+                </div>
+
+                <!-- Event Calendar -->
+                <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        Campus Events
+                    </h2>
+                    <div class="space-y-3">
+                        <div class="bg-slate-700/50 p-3 rounded-lg">
+                            <p class="font-medium">🎓 Career Fair 2023</p>
+                            <p class="text-sm text-slate-400">📅 November 10 | 🕒 10:00 AM</p>
+                            <button onclick="openPopup('Reserved successfully')" class="mt-2 px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm hover:bg-purple-500/30 transition">
+                                RSVP Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl">
+                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                    Academic Overview
+                </h2>
+                <div class="space-y-4">
+                    <div class="bg-slate-700/50 p-4 rounded-lg">
+                        <p class="text-sm text-slate-400">Current GPA</p>
+                        <p id="gpa-value" class="text-2xl font-bold text-green-400">0.00</p>
+                    </div>
+                    <div class="bg-slate-700/50 p-4 rounded-lg">
+                        <p class="text-sm text-slate-400">Attendance</p>
+                        <div class="w-full bg-slate-600 rounded-full h-2 mt-2">
+                            <div id="attendance-bar" class="bg-cyan-400 h-2 rounded-full w-0"></div>
+                        </div>
+                        <p id="attendance-percentage" class="text-xs text-slate-400 mt-1">0% Overall Attendance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Announcement Section -->
+        <div class="mt-8 bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl animate-fade-in">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-rose-400 to-pink-400 bg-clip-text text-transparent">
+                Important Announcements
+            </h2>
+            <div class="space-y-3">
+                <!-- First Announcement -->
+                <div class="bg-slate-700/50 p-3 rounded-lg">
+                    <p class="font-medium">📢 Scholarship Applications Open</p>
+                    <p class="text-sm text-slate-400">Deadline: October 30, 2023</p>
+                </div>
+                <!-- Second Announcement -->
+                <div class="bg-slate-700/50 p-3 rounded-lg">
+                    <p class="font-medium">📢 Campus Cleanup Drive</p>
+                    <p class="text-sm text-slate-400">📅 November 5 | 🕒 9:00 AM</p>
+                </div>
+                <!-- Third Announcement -->
+                <div class="bg-slate-700/50 p-3 rounded-lg">
+                    <p class="font-medium">📢 Final Exam Schedule Released</p>
+                    <p class="text-sm text-slate-400">Check your portal for details</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-slate-400 text-sm">
+            <p>🔒 Secure Student Portal | 📱 Mobile-Friendly Design | 🚀 Real-Time Updates</p>
+            <p class="mt-2">Need help? Contact academic support: support@university.edu</p>
+        </footer>
+    </div>
+
+    <!-- Popup Modal -->
+    <div id="popup-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="glass-effect rounded-xl p-6 shadow-lg text-center">
+            <p id="popup-message" class="text-lg font-semibold mb-4"></p>
+            <button onclick="closePopup()" class="px-4 py-2 bg-cyan-500/20 text-cyan-400 rounded-full hover:bg-cyan-500/30 transition">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Function to open the popup
+        function openPopup(message) {
+            const popupModal = document.getElementById('popup-modal');
+            const popupMessage = document.getElementById('popup-message');
+            popupMessage.textContent = message;
+            popupModal.classList.remove('hidden');
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            const popupModal = document.getElementById('popup-modal');
+            popupModal.classList.add('hidden');
+        }
+
+        // Function to animate GPA number count-up
+        function animateGPA() {
+            const gpaElement = document.getElementById('gpa-value');
+            const targetGPA = 3.75;
+            let currentGPA = 0;
+            const increment = targetGPA / 100;
+
+            const interval = setInterval(() => {
+                currentGPA += increment;
+                if (currentGPA >= targetGPA) {
+                    clearInterval(interval);
+                    currentGPA = targetGPA;
+                }
+                gpaElement.textContent = currentGPA.toFixed(2);
+            }, 20);
+        }
+
+        // Function to animate attendance progress bar
+        function animateAttendance() {
+            const attendanceBar = document.getElementById('attendance-bar');
+            const attendancePercentage = document.getElementById('attendance-percentage');
+            const targetPercentage = 92;
+            let currentPercentage = 0;
+
+            const interval = setInterval(() => {
+                currentPercentage += 1;
+                if (currentPercentage >= targetPercentage) {
+                    clearInterval(interval);
+                    currentPercentage = targetPercentage;
+                }
+                attendanceBar.style.width = `${currentPercentage}%`;
+                attendancePercentage.textContent = `${currentPercentage}% Overall Attendance`;
+            }, 20);
+        }
+
+        // Trigger animations when the page loads
+        window.onload = () => {
+            animateGPA();
+            animateAttendance();
+        };
+    </script>
+</body>
+</html>

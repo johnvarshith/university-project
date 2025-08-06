@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Discussion Forum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .animate-fade-in { animation: fadeIn 0.6s ease-out; }
+        .animate-bounce { animation: bounce 0.5s infinite; }
+        .animate-pulse { animation: pulse 0.3s ease-out; }
+        .glow-on-hover { transition: box-shadow 0.3s ease; }
+        .glow-on-hover:hover { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-slate-800 min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="mb-8 text-center animate-fade-in">
+            <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                University Discussion Forum
+            </h1>
+            <p class="text-slate-300 mt-2">Connect, Discuss, and Collaborate with Your Peers</p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="mb-8 animate-fade-in">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search discussions..."
+                class="w-full p-3 bg-slate-800/70 backdrop-blur-lg rounded-lg border border-slate-700/50 focus:outline-none focus:border-cyan-400 transition"
+            />
+        </div>
+
+        <!-- Categories Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-fade-in">
+            <!-- Academics -->
+            <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl glow-on-hover transition">
+                <h2 class="text-xl font-bold mb-2 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    Academics
+                </h2>
+                <p class="text-slate-300">Discuss courses, assignments, and academic resources.</p>
+                <button onclick="showDiscussions('academics')" class="mt-4 px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-sm hover:bg-green-500/30 transition">
+                    View Discussions
+                </button>
+            </div>
+
+            <!-- Events -->
+            <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl glow-on-hover transition">
+                <h2 class="text-xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Events
+                </h2>
+                <p class="text-slate-300">Share and discuss upcoming university events.</p>
+                <button onclick="showDiscussions('events')" class="mt-4 px-4 py-2 bg-purple-500/20 text-purple-400 rounded-full text-sm hover:bg-purple-500/30 transition">
+                    View Discussions
+                </button>
+            </div>
+
+            <!-- Clubs -->
+            <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl glow-on-hover transition">
+                <h2 class="text-xl font-bold mb-2 bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                    Clubs
+                </h2>
+                <p class="text-slate-300">Connect with student clubs and organizations.</p>
+                <button onclick="showDiscussions('clubs')" class="mt-4 px-4 py-2 bg-amber-500/20 text-amber-400 rounded-full text-sm hover:bg-amber-500/30 transition">
+                    View Discussions
+                </button>
+            </div>
+
+            <!-- Placements -->
+            <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl glow-on-hover transition">
+                <h2 class="text-xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                    Placements
+                </h2>
+                <p class="text-slate-300">Discuss job opportunities, internships, and career advice.</p>
+                <button onclick="showDiscussions('placements')" class="mt-4 px-4 py-2 bg-blue-500/20 text-blue-400 rounded-full text-sm hover:bg-blue-500/30 transition">
+                    View Discussions
+                </button>
+            </div>
+        </div>
+
+        <!-- Discussion Threads -->
+        <div class="bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl animate-fade-in">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-rose-400 to-pink-400 bg-clip-text text-transparent">
+                Latest Discussions
+            </h2>
+            <div class="space-y-4" id="discussionThreads">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+
+        <!-- Reputation System -->
+        <div class="mt-8 bg-slate-800/70 backdrop-blur-lg rounded-xl p-6 shadow-xl animate-fade-in">
+            <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                Top Contributors
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="topContributors">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-slate-400 text-sm">
+            <p>🔒 Secure Forum | 📱 Mobile-Friendly | 🚀 Real-Time Updates</p>
+            <p class="mt-2">Need help? Contact support: support@university.edu</p>
+        </footer>
+    </div>
+
+    <script>
+        // Updated Sample Data with Multiple Discussions
+        const discussions = {
+            academics: [
+                { 
+                    title: "Best Resources for Math 101?", 
+                    author: "@john_doe", 
+                    time: "2 hours ago", 
+                    likes: 12,
+                    comments: [
+                        { author: "@alice_w", text: "Check the university library portal!", time: "1 hour ago" },
+                        { author: "@sam_r", text: "Professor recommended this textbook...", time: "45 mins ago" }
+                    ]
+                },
+                { 
+                    title: "Physics Lab Report Guidelines", 
+                    author: "@emma_w", 
+                    time: "4 hours ago", 
+                    likes: 8,
+                    comments: [
+                        { author: "@liam_g", text: "Deadline extended to Friday", time: "2 hours ago" }
+                    ]
+                }
+            ],
+            events: [
+                { 
+                    title: "Annual Tech Fest 2023", 
+                    author: "@event_team", 
+                    time: "1 day ago", 
+                    likes: 25,
+                    comments: [
+                        { author: "@rohit_k", text: "Excited for the robotics workshop!", time: "18 hours ago" }
+                    ]
+                },
+                { 
+                    title: "Cultural Fest Volunteers Needed", 
+                    author: "@cultural_club", 
+                    time: "3 days ago", 
+                    likes: 15,
+                    comments: [
+                        { author: "@priya_m", text: "I can help with decorations!", time: "2 days ago" }
+                    ]
+                }
+            ],
+            clubs: [
+                { 
+                    title: "Photography Club Exhibition", 
+                    author: "@photo_club", 
+                    time: "5 days ago", 
+                    likes: 30,
+                    comments: [
+                        { author: "@sara_j", text: "Submitting my nature shots!", time: "4 days ago" }
+                    ]
+                },
+                { 
+                    title: "Debate Club Schedule", 
+                    author: "@debate_lead", 
+                    time: "1 week ago", 
+                    likes: 20,
+                    comments: [
+                        { author: "@rahul_p", text: "Beginner-friendly sessions?", time: "6 days ago" }
+                    ]
+                }
+            ],
+            placements: [
+                { 
+                    title: "Internship Opportunities - CS Students", 
+                    author: "@career_office", 
+                    time: "3 days ago", 
+                    likes: 30,
+                    comments: [
+                        { author: "@neha_k", text: "Application process details?", time: "2 days ago" }
+                    ]
+                },
+                { 
+                    title: "Resume Writing Workshop", 
+                    author: "@placement_cell", 
+                    time: "5 days ago", 
+                    likes: 18,
+                    comments: [
+                        { author: "@arjun_m", text: "Can alumni attend?", time: "4 days ago" }
+                    ]
+                }
+            ]
+        };
+
+        const contributors = [
+            { name: "John Doe", username: "@john_doe", contributions: 1200, initials: "JD", color: "cyan" },
+            { name: "Jane Smith", username: "@jane_doe", contributions: 950, initials: "JS", color: "purple" },
+            { name: "Alex Smith", username: "@alex_smith", contributions: 800, initials: "AS", color: "amber" }
+        ];
+
+        // Track currently displayed category
+        let currentCategory = 'academics';
+
+        // Modified Show Discussions Function
+        function showDiscussions(category) {
+            currentCategory = category;
+            document.getElementById('searchInput').value = ''; // Clear search
+            renderDiscussions(category);
+        }
+
+        // Updated Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = discussions[currentCategory].filter(thread => 
+                thread.title.toLowerCase().includes(query) ||
+                thread.author.toLowerCase().includes(query)
+            );
+            renderDiscussions(currentCategory, filtered);
+        });
+
+        // Enhanced Discussion Renderer
+        function renderDiscussions(category, threadsToShow = null) {
+            const threads = threadsToShow || discussions[category];
+            const discussionThreads = document.getElementById('discussionThreads');
+            
+            discussionThreads.innerHTML = threads.map((thread, index) => `
+                <div class="bg-slate-700/50 p-4 rounded-lg mb-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex-1">
+                            <h3 class="font-semibold">${thread.title}</h3>
+                            <p class="text-sm text-slate-400">
+                                Posted by <span class="text-${thread.color}-400">${thread.author}</span> | ${thread.time}
+                            </p>
+                        </div>
+                        <div class="flex items-center space-x-4 pl-4">
+                            <button onclick="handleLike('${category}', ${index})" 
+                                    class="flex items-center space-x-1 group transition-all">
+                                <span class="text-sm text-slate-400 group-hover:text-cyan-400 transition-colors">
+                                    👍 ${thread.likes}
+                                </span>
+                            </button>
+                            <button onclick="toggleComments('${category}', ${index})" 
+                                    class="flex items-center space-x-1 group transition-all">
+                                <span class="text-sm text-slate-400 group-hover:text-purple-400 transition-colors">
+                                    💬 ${thread.comments.length}
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="comments-${category}-${index}" class="mt-4 hidden space-y-3">
+                        ${thread.comments.map(comment => `
+                            <div class="ml-4 pl-4 border-l-2 border-slate-600 animate-fade-in">
+                                <p class="text-sm text-slate-300">${comment.text}</p>
+                                <p class="text-xs text-slate-500 mt-1">
+                                    — ${comment.author} • ${comment.time}
+                                </p>
+                            </div>
+                        `).join('')}
+                        <div class="ml-4 pl-4 border-l-2 border-slate-600">
+                            <textarea id="commentInput-${category}-${index}" 
+                                      class="w-full p-2 bg-slate-800 rounded-lg text-sm"
+                                      placeholder="Add a comment..." maxlength="500"></textarea>
+                            <button onclick="postComment('${category}', ${index})"
+                                    class="mt-2 px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm hover:bg-purple-500/30 transition">
+                                Post Comment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Comment Handling
+        function toggleComments(category, index) {
+            const commentsSection = document.getElementById(`comments-${category}-${index}`);
+            commentsSection.classList.toggle('hidden');
+            if (!commentsSection.classList.contains('hidden')) {
+                commentsSection.style.animation = 'fadeIn 0.3s ease-out';
+            }
+        }
+
+        function postComment(category, index) {
+            const commentInput = document.getElementById(`commentInput-${category}-${index}`);
+            const commentText = commentInput.value.trim();
+            
+            if (commentText) {
+                const newComment = {
+                    author: "@hemanth_user",
+                    text: commentText,
+                    time: "Just now"
+                };
+                
+                discussions[category][index].comments.push(newComment);
+                updateContributions("@hemanth_user", 5);
+                renderDiscussions(category);
+                toggleComments(category, index);
+                animateComment(commentInput.previousElementSibling);
+                commentInput.value = ""; // Clear input after posting
+            }
+        }
+
+        // Like Handling
+        function handleLike(category, index) {
+            const likeButton = event.currentTarget;
+            if (!likeButton.disabled) {
+                discussions[category][index].likes++;
+                updateContributions(discussions[category][index].author, 2);
+                renderDiscussions(category);
+                animateLike(likeButton);
+                likeButton.disabled = true; // Prevent multiple likes
+            }
+        }
+
+        // Contributor System
+        function updateContributions(username, points) {
+            const contributor = contributors.find(c => c.username === username);
+            if (contributor) {
+                contributor.contributions += points;
+                contributor.contributions = Math.min(contributor.contributions, 5000);
+                renderContributors();
+            }
+        }
+
+        // Updated Contributors Renderer
+        function renderContributors() {
+            const sortedContributors = [...contributors].sort((a, b) => b.contributions - a.contributions);
+            const topContributors = document.getElementById('topContributors');
+            
+            topContributors.innerHTML = sortedContributors.map(contributor => `
+                <div class="bg-slate-700/50 p-4 rounded-lg transform transition hover:scale-[1.02]">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-${contributor.color}-400 rounded-full flex items-center justify-center">
+                            <span class="text-lg font-bold">${contributor.initials}</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">${contributor.name}</h3>
+                            <p class="text-sm text-slate-400">
+                                Contributions: ${Math.round(contributor.contributions)}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initial Load
+        renderDiscussions('academics');
+        renderContributors();
+    </script>
+</body>
+</html>
